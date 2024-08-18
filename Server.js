@@ -2,7 +2,7 @@ import express from "express";
 import cors from 'cors'
 import morgan from "morgan";
 import { environments } from './src/config/environments.js'
-import router from './src/routes/productos.routes.js'
+import {router} from './src/routes/routes.js'
 import {startDb} from "./src/db/connection.js";
 
 class Server {

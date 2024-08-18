@@ -1,11 +1,11 @@
-import ProductService from "../services/product.service.js"
+import CrudService from "../services/crud.service.js"
 import { productModel } from "../models/product.model.js";
 
 
 export const getProducts = async (req, res) => {
 
     try {
-        const products = await ProductService.listarProductos();
+        const products = await CrudService.listar(productModel);
         if(products.length === 0 || !products){
             throw({
                 statusCode: 404,
@@ -27,7 +27,7 @@ export const createProduct = async (req, res) => {
 
     try {
 
-        await ProductService.agregar(req.body, productModel)
+        await CrudService.agregar(req.body, productModel)
         return res.status(201).json({
             message: 'Producto creado'
         })
@@ -43,7 +43,7 @@ export const createProduct = async (req, res) => {
 
 export const obtenerProductoPorId = async (req, res) => {
     try {
-        const producto = await ProductService.obtenerProducto(req.params.id)
+        const producto = await CrudService.obtener(req.params.id, productModel)
         res.status(200).json(producto)
     } catch (error) {
         res.status(500).json({ error: error.message });
