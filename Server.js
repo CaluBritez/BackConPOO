@@ -2,7 +2,7 @@ import express from "express";
 import cors from 'cors'
 import morgan from "morgan";
 import { environments } from './src/config/environments.js'
-//import productRoutes from '../routes/productos.routes.js'
+import router from './src/routes/productos.routes.js'
 import {startDb} from "./src/db/connection.js";
 
 class Server {
@@ -26,10 +26,12 @@ class Server {
         this.app.use(cors());
         this.app.use(morgan('dev'));
         this.app.use(express.json());
+        this.app.use(express.json());
+        this.app.use(express.urlencoded({ extended: false }));
     }
 
     routes(){
-        this.app.use('/api', (req, res) => res.send('Hello World'))
+        this.app.use(router)
     }
 
     listen(){
